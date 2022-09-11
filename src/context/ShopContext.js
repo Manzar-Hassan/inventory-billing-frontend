@@ -15,7 +15,7 @@ export const ShopContextProvider = ({ children }) => {
     phone: "",
     items: [],
     quantity: [],
-    amount: 0,
+    totalAmount: 0,
     size: [],
     date: new Date().toDateString(),
   });

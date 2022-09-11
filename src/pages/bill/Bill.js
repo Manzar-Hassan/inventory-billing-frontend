@@ -90,13 +90,13 @@ const Bill = () => {
           stock.item === billDetails.items[billDetails.items.length - 1]
       );
       const price = filteredStock[0].sellingPrice * Number(e.target.value);
-      setAmount([...amount,price]);
-      setBillDetails(billDetails.amount + price);
+      setAmount([...amount, price]);
       setQuantity(e.target.value);
       setCount(Number(e.target.value) + count);
       setBillDetails({
         ...billDetails,
         quantity: [...billDetails.quantity, e.target.value],
+        totalAmount: billDetails.totalAmount + price,
       });
     } else if (name === "size") {
       setSize(e.target.value);
@@ -116,7 +116,7 @@ const Bill = () => {
         stock: Number(filteredStock[0].stock) - Number(billDetails.quantity[i]),
       };
 
-      await axios.put(
+      await axios.post(
         url + `/updateStocks/${billDetails.items[i]}`,
         updatedStock
       );
@@ -139,6 +139,24 @@ const Bill = () => {
       .post(url + "/bill", billDetails)
       .then(({ data }) => console.log(data.msg));
     await updateStockHandler();
+
+    setBillDetails({
+      name: "",
+      email: "",
+      phone: "",
+      items: [],
+      quantity: [],
+      totalAmount: 0,
+      size: [],
+    });
+
+    setId(0);
+    setSize("");
+    setItem("");
+    setCount(0);
+    setQuantity("");
+    setCustomerItem("");
+    setAmount([]);
 
     setLoading(false);
   };
@@ -356,7 +374,9 @@ const Bill = () => {
                     </StyledTableBodyText>
                   </TableCell>
                   <TableCell>
-                    <StyledTableBodyText>Rs. {amount[index]}</StyledTableBodyText>
+                    <StyledTableBodyText>
+                      Rs. {amount[index]}
+                    </StyledTableBodyText>
                   </TableCell>
                   <TableCell>
                     <IconButton onClick={handleCustomerItems}>

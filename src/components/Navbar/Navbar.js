@@ -12,13 +12,15 @@ import {
 } from "@mui/material";
 import { FaShopware } from "react-icons/fa";
 import { AiOutlineLogout } from "react-icons/ai";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ShopContext from "../../context/ShopContext";
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
+  const { loginUser, setIsLoggedIn } = useContext(ShopContext);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -42,8 +44,12 @@ const Navbar = () => {
           My mart
         </Typography>
         <Stack direction="row" spacing={2}>
-          <Button color="inherit" onClick={()=>navigate("/bill")}>Bill</Button>
-          <Button color="inherit" onClick={()=>navigate("/sales")}>Sales</Button>
+          <Button color="inherit" onClick={() => navigate("/bill")}>
+            Bill
+          </Button>
+          <Button color="inherit" onClick={() => navigate("/sales")}>
+            Sales
+          </Button>
           <Stack direction="row" sx={{ alignItems: "center" }}>
             <Avatar
               src="https://picsum.photos/50/50"
@@ -58,7 +64,7 @@ const Navbar = () => {
               aria-expanded={open ? "true" : undefined}
               color="inherit"
             >
-              Admin
+              {loginUser}
             </Button>
             <Menu
               anchorEl={anchorEl}
@@ -69,7 +75,7 @@ const Navbar = () => {
               }}
               onClose={() => setAnchorEl(null)}
             >
-              <MenuItem>
+              <MenuItem onClick={() => setIsLoggedIn(false)}>
                 <Box
                   sx={{
                     display: "flex",

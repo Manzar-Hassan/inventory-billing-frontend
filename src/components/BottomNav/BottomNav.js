@@ -1,7 +1,7 @@
 import { MdCalculate } from "react-icons/md";
 import { BsFillPersonFill } from "react-icons/bs";
 import { FaDollarSign } from "react-icons/fa";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/system";
 import { AiOutlineLogout } from "react-icons/ai";
@@ -12,12 +12,14 @@ import {
   MenuItem,
   Typography,
 } from "@mui/material";
+import ShopContext from "../../context/ShopContext";
 
 const BottomNav = () => {
   const [value, setValue] = useState(0);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
+  const { setIsLoggedIn } = useContext(ShopContext);
 
   const handleChange = (event, value) => {
     setValue(value);
@@ -48,7 +50,7 @@ const BottomNav = () => {
           icon={<FaDollarSign style={{ color: "#fafafa" }} />}
         />
         <BottomNavigationAction
-          onClick={(e)=>setAnchorEl(e.currentTarget)}
+          onClick={(e) => setAnchorEl(e.currentTarget)}
           id="bottomNav--button"
           aria-controls={open ? "profile--menu" : undefined}
           aria-haspopup="true"
@@ -67,7 +69,7 @@ const BottomNav = () => {
         }}
         onClose={() => setAnchorEl(null)}
       >
-        <MenuItem>
+        <MenuItem onClick={() => setIsLoggedIn(false)}>
           <Box
             sx={{
               display: "flex",

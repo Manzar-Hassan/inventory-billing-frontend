@@ -17,7 +17,7 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<SharedComponent />}>
             <Route
-              path="/bill"
+              index
               element={
                 <ProtectedRoute>
                   <Bill />
