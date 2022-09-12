@@ -40,7 +40,7 @@ const BottomNav = () => {
         showLabels
       >
         <BottomNavigationAction
-          onClick={() => navigate("/bill")}
+          onClick={() => navigate("/")}
           label="Bill"
           icon={<MdCalculate style={{ color: "#fafafa" }} />}
         />

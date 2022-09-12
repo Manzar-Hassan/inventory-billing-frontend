@@ -32,19 +32,19 @@ const Navbar = () => {
         <IconButton
           color="inherit"
           aria-label="logo"
-          onClick={() => navigate("/bill")}
+          onClick={() => navigate("/")}
         >
           <FaShopware />
         </IconButton>
         <Typography
           component="div"
           sx={{ flexGrow: 1, cursor: "pointer" }}
-          onClick={() => navigate("/bill")}
+          onClick={() => navigate("/")}
         >
           My mart
         </Typography>
         <Stack direction="row" spacing={2}>
-          <Button color="inherit" onClick={() => navigate("/bill")}>
+          <Button color="inherit" onClick={() => navigate("/")}>
             Bill
           </Button>
           <Button color="inherit" onClick={() => navigate("/sales")}>

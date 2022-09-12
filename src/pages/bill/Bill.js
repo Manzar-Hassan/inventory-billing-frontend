@@ -141,9 +141,7 @@ const Bill = () => {
     await updateStockHandler();
 
     setBillDetails({
-      name: "",
-      email: "",
-      phone: "",
+      ...billDetails,
       items: [],
       quantity: [],
       totalAmount: 0,
@@ -155,7 +153,7 @@ const Bill = () => {
     setItem("");
     setCount(0);
     setQuantity("");
-    setCustomerItem("");
+    setCustomerItem([""]);
     setAmount([]);
 
     setLoading(false);

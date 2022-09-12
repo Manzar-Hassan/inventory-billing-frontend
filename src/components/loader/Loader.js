@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 import React from "react";
 
 const StyledBox = styled("div")({
-  height: "10px",
-  width: "10px",
+  height: "8px",
+  width: "8px",
   backgroundColor: "#fca61f",
   borderRadius: "50%",
 });

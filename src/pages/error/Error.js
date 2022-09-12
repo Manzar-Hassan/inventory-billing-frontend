@@ -20,7 +20,7 @@ const Error = () => {
           style={{ height: "300px", width: "300px" }}
           alt="Error Page"
         />
-        <Button onClick={() => navigate("/bill")}>Return to Billing Page</Button>
+        <Button onClick={() => navigate("/")}>Return to Billing Page</Button>
       </Stack>
     </Container>
   );
