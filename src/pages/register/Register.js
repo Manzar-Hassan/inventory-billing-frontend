@@ -19,22 +19,33 @@ import { Link, useNavigate } from "react-router-dom";
 import { registerSchema } from "../../schema/RegisterSchema";
 
 const Register = () => {
-  const { loading, setLoading } = useContext(ShopContext);
+  const {
+    loading,
+    setLoading,
+    toastifyContainer,
+    errorToast,
+    successToast,
+    url,
+  } = useContext(ShopContext);
   const navigate = useNavigate();
 
   const onSubmit = async (values, action) => {
-    const url = "https://inventory-billing-05.herokuapp.com/register";
     const data = {};
     data.username = values.regName;
     data.password = values.regPassword;
 
     try {
       setLoading(true);
-      const registerReceivedInfo = await axios.post(url, data)
-      alert(registerReceivedInfo.data.msg)
+      const registerReceivedInfo = await axios.post(url + "/register", data);
 
-      if(registerReceivedInfo.status===200) {
-        navigate("/login");
+      if (registerReceivedInfo.status !== 200) {
+        errorToast(registerReceivedInfo.data.msg);
+        
+      } else if (registerReceivedInfo.status === 200) {
+        successToast(registerReceivedInfo.data.msg);
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
       }
       setLoading(false);
     } catch (error) {
@@ -182,6 +193,7 @@ const Register = () => {
           <Loader />
         </Backdrop>
       </div>
+      {toastifyContainer}
     </>
   );
 };

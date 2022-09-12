@@ -19,35 +19,41 @@ import ShopContext from "../../context/ShopContext";
 import Loader from "../../components/loader/Loader";
 
 const Login = () => {
-  const { loading, setLoading, setIsLoggedIn, setLoginUser } =
-    useContext(ShopContext);
+  const {
+    loading,
+    setLoading,
+    setIsLoggedIn,
+    setLoginUser,
+    url,
+    toastifyContainer,
+    successToast,
+    errorToast,
+  } = useContext(ShopContext);
   const navigate = useNavigate();
 
   const onSubmit = async (values, action) => {
-    const url = "https://inventory-billing-05.herokuapp.com/login";
     const data = {};
     data.username = signin.values.name;
     data.password = signin.values.password;
 
+    setLoading(true);
     try {
-      setLoading(true);
-      const loginCredentialsData = await axios.post(url, data);
-      setLoading(false);
-      console.log(loginCredentialsData);
+      const loginCredentialsData = await axios.post(url + "/login", data);
 
       if (loginCredentialsData.status === 200) {
-        alert(loginCredentialsData.data.msg);
         setIsLoggedIn(true);
         setLoginUser(data.username);
-        navigate("/");
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+        successToast(loginCredentialsData.data.msg);
       } else {
-        alert("wrong credentials!!");
-        action.resetForm();
-        return;
+        errorToast("Wrong credentials !!");
       }
     } catch (error) {
       console.log(error);
     }
+    setLoading(false);
     action.resetForm();
   };
 
@@ -137,9 +143,9 @@ const Login = () => {
                   helperText={signin.touched.password && signin.errors.password}
                   required
                 />
-                  <Button variant="contained" type="submit">
-                    confirm
-                  </Button>
+                <Button variant="contained" type="submit">
+                  confirm
+                </Button>
               </form>
               <Grid item mt={1}>
                 <Typography sx={{ fontSize: "0.7rem" }}>
@@ -163,6 +169,7 @@ const Login = () => {
           <Loader />
         </Backdrop>
       </div>
+      {toastifyContainer}
     </>
   );
 };
