@@ -40,12 +40,9 @@ const Register = () => {
 
       if (registerReceivedInfo.status !== 200) {
         errorToast(registerReceivedInfo.data.msg);
-        
       } else if (registerReceivedInfo.status === 200) {
         successToast(registerReceivedInfo.data.msg);
-        setTimeout(() => {
-          navigate("/login");
-        }, 2000);
+        navigate("/login");
       }
       setLoading(false);
     } catch (error) {

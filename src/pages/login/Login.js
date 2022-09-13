@@ -41,12 +41,10 @@ const Login = () => {
       const loginCredentialsData = await axios.post(url + "/login", data);
 
       if (loginCredentialsData.status === 200) {
+        successToast(loginCredentialsData.data.msg);
         setIsLoggedIn(true);
         setLoginUser(data.username);
-        setTimeout(() => {
-          navigate("/");
-        }, 2000);
-        successToast(loginCredentialsData.data.msg);
+        navigate("/");
       } else {
         errorToast("Wrong credentials !!");
       }
