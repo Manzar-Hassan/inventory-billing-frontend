@@ -7,9 +7,11 @@ import SharedComponent from "./helper/SharedComponent";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./helper/ProtectedRoutes";
 import { ShopContextProvider } from "./context/ShopContext";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   return (
+    <>
     <BrowserRouter>
       <ShopContextProvider>
         <Routes>
@@ -37,6 +39,8 @@ const App = () => {
         </Routes>
       </ShopContextProvider>
     </BrowserRouter>
+    <ToastContainer theme="dark"/>
+    </>
   );
 };
 

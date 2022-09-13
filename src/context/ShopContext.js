@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createContext, useState, useEffect } from "react";
-import { toast, ToastContainer } from "react-toastify";
+import { toast, Flip } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const ShopContext = createContext("");
@@ -24,6 +24,7 @@ export const ShopContextProvider = ({ children }) => {
 
   const errorToast = (msg) => {
     toast.error(msg, {
+      transition: Flip,
       position: "top-right",
       autoClose: 2000,
       hideProgressBar: false,
@@ -36,6 +37,7 @@ export const ShopContextProvider = ({ children }) => {
 
   const successToast = (msg) =>
     toast.success(msg, {
+      transition: Flip,
       position: "top-right",
       autoClose: 2000,
       hideProgressBar: false,
@@ -44,21 +46,6 @@ export const ShopContextProvider = ({ children }) => {
       draggable: true,
       progress: undefined,
     });
-
-  const toastifyContainer = (
-    <ToastContainer
-      theme="dark"
-      position="top-right"
-      autoClose={2000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-    />
-  );
 
   useEffect(() => {
     axios.get(url + "/sales").then(({ data }) => setStock(data));
@@ -76,7 +63,6 @@ export const ShopContextProvider = ({ children }) => {
         billDetails,
         setBillDetails,
         stock,
-        toastifyContainer,
         successToast,
         errorToast,
         url,

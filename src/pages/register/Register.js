@@ -193,7 +193,6 @@ const Register = () => {
           <Loader />
         </Backdrop>
       </div>
-      {toastifyContainer}
     </>
   );
 };

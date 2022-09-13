@@ -169,7 +169,6 @@ const Login = () => {
           <Loader />
         </Backdrop>
       </div>
-      {toastifyContainer}
     </>
   );
 };

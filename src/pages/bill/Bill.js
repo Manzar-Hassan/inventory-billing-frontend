@@ -43,9 +43,16 @@ const Bill = () => {
   const [customerItem, setCustomerItem] = useState([""]);
   const [amount, setAmount] = useState([]);
   const [addCustomerInfo, setAddCustomerInfo] = useState(false);
-  const { loading, setLoading, billDetails, setBillDetails, stock } =
-    useContext(ShopContext);
-  const url = "https://inventory-billing-05.herokuapp.com";
+  const {
+    loading,
+    setLoading,
+    billDetails,
+    setBillDetails,
+    stock,
+    errorToast,
+    successToast,
+    url
+  } = useContext(ShopContext);
 
   const handleBill = (e) => {
     setBillDetails({ ...billDetails, [e.target.name]: e.target.value });
@@ -58,13 +65,13 @@ const Bill = () => {
 
   const handleCustomerItems = () => {
     if (item === "") {
-      alert("please select item!!");
-      return;
-    } else if (quantity === "") {
-      alert("please enter quantity!!");
+      errorToast("please select item!!");
       return;
     } else if (size === "") {
-      alert("please select size!!");
+      errorToast("please enter quantity!!");
+      return;
+    } else if (quantity === "") {
+      errorToast("please select size!!");
       return;
     }
 
@@ -129,7 +136,18 @@ const Bill = () => {
       billDetails.email === "" ||
       billDetails.phone === ""
     ) {
-      alert("please fill user details!!");
+      errorToast("please fill user details!!");
+      return;
+    }
+
+    if (item === "") {
+      errorToast("please select item!!");
+      return;
+    } else if (quantity === "") {
+      errorToast("please enter quantity!!");
+      return;
+    } else if (size === "") {
+      errorToast("please select size!!");
       return;
     }
 
@@ -137,7 +155,7 @@ const Bill = () => {
 
     await axios
       .post(url + "/bill", billDetails)
-      .then(({ data }) => console.log(data.msg));
+      .then(({ data }) => successToast(data.msg));
     await updateStockHandler();
 
     setBillDetails({
@@ -337,7 +355,7 @@ const Bill = () => {
                           <TextField
                             name="size"
                             size="small"
-                            label="Item"
+                            label="Size"
                             select
                             value={size}
                             onChange={handleChange}

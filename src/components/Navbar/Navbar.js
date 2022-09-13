@@ -52,7 +52,7 @@ const Navbar = () => {
           </Button>
           <Stack direction="row" sx={{ alignItems: "center" }}>
             <Avatar
-              src="https://picsum.photos/50/50"
+              src="https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/476.jpg"
               alt="profile pic"
               sx={{ height: "1.5rem", width: "1.5rem" }}
             />
