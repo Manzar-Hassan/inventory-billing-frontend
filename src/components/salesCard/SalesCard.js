@@ -8,7 +8,7 @@ import {
 } from "../../style/Style";
 import { BiUpArrowAlt } from "react-icons/bi";
 
-const SalesCard = () => {
+const SalesCard = ({product}) => {
   return (
     <StyledSalesCard>
       <Stack
@@ -17,7 +17,7 @@ const SalesCard = () => {
         width="100%"
         mb="1rem"
       >
-        <StyledSalesTextLight sx={{color:"#495057"}}>Sales</StyledSalesTextLight>
+        <StyledSalesTextLight sx={{color:"#495057"}}>{product.item}</StyledSalesTextLight>
         <IoResizeSharp style={{ color: "#868e96" }} />
       </Stack>
       <Stack direction="row" justifyContent="space-evenly" width="100%">
@@ -40,7 +40,7 @@ const SalesCard = () => {
       <StyledSalesTextLight
         sx={{ fontSize: "0.8rem", marginRight: "3.5rem", marginTop: "0.5rem" }}
       >
-        Last year ₹32640
+        {product.item} left {product.stock}
       </StyledSalesTextLight>
     </StyledSalesCard>
   );

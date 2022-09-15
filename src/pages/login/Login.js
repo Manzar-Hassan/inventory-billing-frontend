@@ -24,10 +24,9 @@ const Login = () => {
     setLoading,
     setIsLoggedIn,
     setLoginUser,
-    url,
-    toastifyContainer,
     successToast,
     errorToast,
+    url,
   } = useContext(ShopContext);
   const navigate = useNavigate();
 

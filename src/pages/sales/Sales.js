@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Stack, Typography } from "@mui/material";
 import { BiDownload } from "react-icons/bi";
 import SalesCard from "../../components/salesCard/SalesCard";
@@ -12,10 +12,11 @@ import {
 } from "../../style/Style";
 import LineChart from "../../components/chart/LineChart";
 import UserSalesRecord from "../../components/modal/UserSalesRecord";
-
-const cards = [1, 2, 3, 4];
+import ShopContext from "../../context/ShopContext";
 
 const Sales = () => {
+  const { stock } = useContext(ShopContext);
+
   return (
     <>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
@@ -36,8 +37,8 @@ const Sales = () => {
           justifyContent="space-evenly"
           gap={3}
         >
-          {cards.map((card, index) => (
-            <SalesCard key={index} />
+          {stock.map((product, index) => (
+            <SalesCard key={index} product={product}/>
           ))}
         </Stack>
       </StyledSalesCardContainer>
@@ -54,7 +55,7 @@ const Sales = () => {
               <Typography
                 sx={{ fontSize: "0.7rem", fontWeight: 700, color: "#212829" }}
               >
-                Marketing
+                Last year Sales
               </Typography>
             </StyledChartLegend>
             <StyledChartLegend>
@@ -62,7 +63,7 @@ const Sales = () => {
               <Typography
                 sx={{ fontSize: "0.7rem", fontWeight: 700, color: "#212829" }}
               >
-                Sales
+                This year Sales
               </Typography>
             </StyledChartLegend>
           </Stack>

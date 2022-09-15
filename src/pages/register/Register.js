@@ -19,14 +19,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { registerSchema } from "../../schema/RegisterSchema";
 
 const Register = () => {
-  const {
-    loading,
-    setLoading,
-    toastifyContainer,
-    errorToast,
-    successToast,
-    url,
-  } = useContext(ShopContext);
+  const { loading, setLoading, errorToast, successToast, url } =
+    useContext(ShopContext);
   const navigate = useNavigate();
 
   const onSubmit = async (values, action) => {

@@ -51,10 +51,10 @@ const Bill = () => {
     stock,
     errorToast,
     successToast,
-    url
+    url,
   } = useContext(ShopContext);
 
-  const handleBill = (e) => {
+  const handleCustomerDetails = (e) => {
     setBillDetails({ ...billDetails, [e.target.name]: e.target.value });
   };
 
@@ -136,17 +136,17 @@ const Bill = () => {
       billDetails.email === "" ||
       billDetails.phone === ""
     ) {
-      errorToast("please fill user details!!");
+      errorToast("please fill customer details!!");
       return;
     }
 
-    if (item === "") {
+    if (billDetails.items.length === 0) {
       errorToast("please select item!!");
       return;
-    } else if (quantity === "") {
-      errorToast("please enter quantity!!");
+    } else if (billDetails.size.length === 0) {
+      errorToast("please enter size!!");
       return;
-    } else if (size === "") {
+    } else if (billDetails.quantity.length === 0) {
       errorToast("please select size!!");
       return;
     }
@@ -198,7 +198,7 @@ const Bill = () => {
                   label="name"
                   name="name"
                   variant="standard"
-                  onChange={handleBill}
+                  onChange={handleCustomerDetails}
                   value={billDetails.name}
                 />
               ) : billDetails.name === "" ? (
@@ -215,7 +215,7 @@ const Bill = () => {
                   label="email"
                   name="email"
                   variant="standard"
-                  onChange={handleBill}
+                  onChange={handleCustomerDetails}
                   value={billDetails.email}
                 />
               ) : billDetails.email === "" ? (
@@ -232,7 +232,7 @@ const Bill = () => {
                   label="phone"
                   name="phone"
                   variant="standard"
-                  onChange={handleBill}
+                  onChange={handleCustomerDetails}
                   value={billDetails.phone}
                 />
               ) : billDetails.phone === "" ? (
@@ -242,13 +242,18 @@ const Bill = () => {
               )}
             </StyledUserInfo>
           </StyledCustomerCard>
-          <Box>
-            <Badge badgeContent={count} color="secondary">
-              <AiOutlineShoppingCart
-                style={{ fontSize: "2rem", color: "#6741d9" }}
-              />
-            </Badge>
-          </Box>
+          <StyledCustomerCard
+            sx={{ display: "flex", gap: 2, alignItems: "center" }}
+          >
+            <StyledUserInfo component="div">Items Purchased</StyledUserInfo>
+            <Box>
+              <Badge badgeContent={count} color="secondary">
+                <AiOutlineShoppingCart
+                  style={{ fontSize: "2rem", color: "#6741d9" }}
+                />
+              </Badge>
+            </Box>
+          </StyledCustomerCard>
         </Stack>
         <Box mt={2} sx={{ display: "flex", alignItems: "center", gap: 2 }}>
           <StyledButton
