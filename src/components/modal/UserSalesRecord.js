@@ -27,7 +27,7 @@ const UserSalesRecord = () => {
   return (
     <div>
       <Tooltip
-        title="Return book"
+        title="sales records"
         onClick={() => setOpenModal(true)}
         sx={{
           position: "fixed",
@@ -104,7 +104,7 @@ const UserSalesRecord = () => {
                   </TableCell>
                   <TableCell>
                     <IconButton>
-                      <BiDownload size="1.2rem"/>
+                      <BiDownload style={{ fontSize: "1.2rem", color: "#6741d9" }}/>
                     </IconButton>
                   </TableCell>
                 </TableRow>
