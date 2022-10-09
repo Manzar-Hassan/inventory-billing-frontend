@@ -21,7 +21,7 @@ const Sales = () => {
     <>
       {loginUser !== "manzar" ? (
         <StyledSalesText mt={3}>
-          Sorry, you do not have permission to access this page
+          Sorry, you do not have permission to access this page...
         </StyledSalesText>
       ) : (
         <>

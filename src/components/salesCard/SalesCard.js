@@ -10,7 +10,7 @@ import { BiUpArrowAlt } from "react-icons/bi";
 
 const SalesCard = ({product}) => {
   return (
-    <StyledSalesCard>
+    <StyledSalesCard sx={{cursor:"pointer"}}>
       <Stack
         direction="row"
         justifyContent="space-between"
