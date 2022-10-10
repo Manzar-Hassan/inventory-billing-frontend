@@ -13,7 +13,7 @@ const getStripe = () => {
 
 const Payment = ({ billHandler }) => {
   const [items, setItems] = useState([]);
-  const { billDetails, setBillDetails,url } = useContext(ShopContext);
+  const { billDetails, setBillDetails } = useContext(ShopContext);
 
   const getItemId = (itemName) => {
     if (itemName === "T-shirt") return process.env.REACT_APP_TSHIRT_ID;

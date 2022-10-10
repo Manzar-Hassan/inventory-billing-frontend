@@ -1,5 +1,4 @@
 import Bill from "./pages/bill/Bill";
-import Error from "./pages/error/Error";
 import Login from "./pages/login/Login";
 import Sales from "./pages/sales/Sales";
 import Register from "./pages/register/Register";
@@ -8,7 +7,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./helper/ProtectedRoutes";
 import { ShopContextProvider } from "./context/ShopContext";
 import { ToastContainer } from "react-toastify";
-import Success from "./pages/success/Success";
 
 const App = () => {
   return (
@@ -36,8 +34,6 @@ const App = () => {
                 }
               />
             </Route>
-            <Route path="/success" element={<Success />} />
-            <Route path="*" element={<Error />} />
           </Routes>
         </ShopContextProvider>
       </BrowserRouter>
