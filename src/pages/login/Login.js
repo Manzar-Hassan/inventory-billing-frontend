@@ -26,6 +26,7 @@ const Login = () => {
     setLoginUser,
     successToast,
     errorToast,
+    billDetails,
     url,
   } = useContext(ShopContext);
   const navigate = useNavigate();
@@ -41,8 +42,11 @@ const Login = () => {
 
       if (loginCredentialsData.status === 200) {
         successToast(loginCredentialsData.data.msg);
+        localStorage.setItem("userLoggedIn", true);
         setIsLoggedIn(true);
+        localStorage.setItem("username", data.username);
         setLoginUser(data.username);
+        localStorage.setItem("paymentDeatils", JSON.stringify(billDetails));
         navigate("/");
       } else {
         errorToast("Wrong credentials !!");

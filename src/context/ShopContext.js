@@ -6,11 +6,11 @@ import "react-toastify/dist/ReactToastify.css";
 const ShopContext = createContext("");
 
 export const ShopContextProvider = ({ children }) => {
-  const url = "https://inventory-billing-05.herokuapp.com";
+  const url = process.env.REACT_APP_BACKEND_URL;
   const [stock, setStock] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [loginUser, setLoginUser] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("userLoggedIn"));
+  const [loginUser, setLoginUser] = useState(localStorage.getItem("username"));
   const [billDetails, setBillDetails] = useState({
     name: "",
     email: "",

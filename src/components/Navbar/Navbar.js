@@ -26,6 +26,12 @@ const Navbar = () => {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleUserLogout = () => {
+    localStorage.removeItem("userLoggedIn");
+    setIsLoggedIn(false);
+    localStorage.removeItem("username")
+  };
+
   return (
     <AppBar position="static" sx={{ backgroundColor: "#000" }}>
       <Toolbar>
@@ -75,7 +81,7 @@ const Navbar = () => {
               }}
               onClose={() => setAnchorEl(null)}
             >
-              <MenuItem onClick={() => setIsLoggedIn(false)}>
+              <MenuItem onClick={handleUserLogout}>
                 <Box
                   sx={{
                     display: "flex",

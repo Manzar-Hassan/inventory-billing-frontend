@@ -33,6 +33,7 @@ import {
 } from "../../style/Style";
 import Loader from "../../components/loader/Loader";
 import axios from "axios";
+import Payment from "../payment/Payment";
 
 const Bill = () => {
   const [id, setId] = useState(0);
@@ -155,16 +156,9 @@ const Bill = () => {
 
     await axios
       .post(url + "/bill", billDetails)
-      .then(({ data }) => successToast(data.msg));
+      .then(({ data }) => successToast("Request received"));
+      successToast("redirecting to Payment Page...")
     await updateStockHandler();
-
-    setBillDetails({
-      ...billDetails,
-      items: [],
-      quantity: [],
-      totalAmount: 0,
-      size: [],
-    });
 
     setId(0);
     setSize("");
@@ -179,7 +173,6 @@ const Bill = () => {
 
   return (
     <>
-      {console.log(stock, billDetails)}
       <Divider sx={{ marginTop: "3rem" }}>
         <StyledHeader label="Billing Section" />
       </Divider>
@@ -440,9 +433,7 @@ const Bill = () => {
           </Table>
         </TableContainer>
         <Box my={2}>
-          <StyledButton variant="contained" onClick={billHandler}>
-            Submit
-          </StyledButton>
+          <Payment billHandler={billHandler} />
         </Box>
       </StyledSalesCardContainer>
       <div>

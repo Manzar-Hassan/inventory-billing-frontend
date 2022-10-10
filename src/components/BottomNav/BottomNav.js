@@ -25,6 +25,12 @@ const BottomNav = () => {
     setValue(value);
   };
 
+  const handleUserLogout = () => {
+    localStorage.removeItem("userLoggedIn");
+    setIsLoggedIn(false);
+    localStorage.removeItem("username")
+  };
+
   return (
     <>
       <BottomNavigation
@@ -69,7 +75,7 @@ const BottomNav = () => {
         }}
         onClose={() => setAnchorEl(null)}
       >
-        <MenuItem onClick={() => setIsLoggedIn(false)}>
+        <MenuItem onClick={handleUserLogout}>
           <Box
             sx={{
               display: "flex",
