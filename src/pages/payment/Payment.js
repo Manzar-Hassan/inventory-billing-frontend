@@ -36,8 +36,8 @@ const Payment = ({ billHandler }) => {
   const checkoutOptions = {
     lineItems: items,
     mode: "payment",
-    successUrl: `${url}/success`,
-    cancelUrl: `${url}/error`,
+    successUrl: `https://bill-success-page.netlify.app/`,
+    cancelUrl: `https://bill-error-page.netlify.app/`,
   };
 
   const redirectToCheckout = async () => {
