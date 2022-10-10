@@ -13,7 +13,7 @@ const getStripe = () => {
 
 const Payment = ({ billHandler }) => {
   const [items, setItems] = useState([]);
-  const { billDetails, setBillDetails } = useContext(ShopContext);
+  const { billDetails, setBillDetails,url } = useContext(ShopContext);
 
   const getItemId = (itemName) => {
     if (itemName === "T-shirt") return process.env.REACT_APP_TSHIRT_ID;
@@ -36,8 +36,8 @@ const Payment = ({ billHandler }) => {
   const checkoutOptions = {
     lineItems: items,
     mode: "payment",
-    successUrl: "http://localhost:3000/success",
-    cancelUrl: "http://localhost:3000/error",
+    successUrl: `${url}/success`,
+    cancelUrl: `${url}/error`,
   };
 
   const redirectToCheckout = async () => {
