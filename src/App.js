@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./helper/ProtectedRoutes";
 import { ShopContextProvider } from "./context/ShopContext";
 import { ToastContainer } from "react-toastify";
+import Invoice from "./components/invoice/Invoice";
 
 const App = () => {
   return (
@@ -34,6 +35,14 @@ const App = () => {
                 }
               />
             </Route>
+            <Route
+              path="/invoice"
+              element={
+                <ProtectedRoute>
+                  <Invoice />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </ShopContextProvider>
       </BrowserRouter>

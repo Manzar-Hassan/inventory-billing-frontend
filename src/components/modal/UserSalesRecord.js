@@ -22,11 +22,25 @@ import {
 import { BiDownload } from "react-icons/bi";
 import ShopContext from "../../context/ShopContext";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const UserSalesRecord = () => {
   const [openModal, setOpenModal] = useState(false);
-  const [billRecords, setBillRecords] = useState([]);
-  const { loading, setLoading, url } = useContext(ShopContext);
+  const {
+    loading,
+    setLoading,
+    url,
+    billRecords,
+    setBillRecords,
+    setSingleDataSales,
+  } = useContext(ShopContext);
+  const navigate = useNavigate();
+
+  const singleSalesData = (id) => {
+    setSingleDataSales(billRecords.find((user) => user._id === id));
+    setOpenModal(false);
+    navigate("/invoice");
+  };
 
   const billRecordshandler = async () => {
     try {
@@ -91,44 +105,52 @@ const UserSalesRecord = () => {
                     <StyledTableHeadersText>Total ₹</StyledTableHeadersText>
                   </TableCell>
                   <TableCell>
-                    <StyledTableHeadersText>
-                      Download
-                    </StyledTableHeadersText>
+                    <StyledTableHeadersText>Download</StyledTableHeadersText>
                   </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {loading ? <StyledSalesText sx={{textAlign:"center"}}>Please wait...</StyledSalesText> :
-                billRecords.map((bill, index) => (
-                  <TableRow>
-                    <TableCell key={bill._id}>
-                      <StyledTableBodyText>{index + 1}</StyledTableBodyText>
-                    </TableCell>
-                    <TableCell>
-                      <StyledTableBodyText>{bill.name}</StyledTableBodyText>
-                    </TableCell>
-                    <TableCell>
-                      <StyledTableBodyText>Turtle</StyledTableBodyText>
-                    </TableCell>
-                    <TableCell>
-                      <StyledTableBodyText>{bill.items.join(" ,")}</StyledTableBodyText>
-                    </TableCell>
-                    <TableCell>
-                      <StyledTableBodyText>{bill.quantity.length}</StyledTableBodyText>
-                    </TableCell>
-                    <TableCell>
-                      <StyledTableBodyText>Rs.{bill.totalAmount}</StyledTableBodyText>
-                    </TableCell>
-                    <TableCell>
-                      <IconButton>
-                        <BiDownload
-                          style={{ fontSize: "1.2rem", color: "#6741d9" }}
-                        />
-                      </IconButton>
-                    </TableCell>
-                  </TableRow>
-                ))
-              }
+                {loading ? (
+                  <StyledSalesText sx={{ textAlign: "center" }}>
+                    Please wait...
+                  </StyledSalesText>
+                ) : (
+                  billRecords.map((bill, index) => (
+                    <TableRow key={bill._id}>
+                      <TableCell>
+                        <StyledTableBodyText>{index + 1}</StyledTableBodyText>
+                      </TableCell>
+                      <TableCell>
+                        <StyledTableBodyText>{bill.name}</StyledTableBodyText>
+                      </TableCell>
+                      <TableCell>
+                        <StyledTableBodyText>Turtle</StyledTableBodyText>
+                      </TableCell>
+                      <TableCell>
+                        <StyledTableBodyText>
+                          {bill.items.join(" ,")}
+                        </StyledTableBodyText>
+                      </TableCell>
+                      <TableCell>
+                        <StyledTableBodyText>
+                          {bill.quantity.length}
+                        </StyledTableBodyText>
+                      </TableCell>
+                      <TableCell>
+                        <StyledTableBodyText>
+                          Rs.{bill.totalAmount}
+                        </StyledTableBodyText>
+                      </TableCell>
+                      <TableCell>
+                        <IconButton onClick={() => singleSalesData(bill._id)}>
+                          <BiDownload
+                            style={{ fontSize: "1.2rem", color: "#6741d9" }}
+                          />
+                        </IconButton>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                )}
               </TableBody>
             </Table>
           </TableContainer>

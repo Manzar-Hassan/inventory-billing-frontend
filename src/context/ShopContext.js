@@ -8,8 +8,12 @@ const ShopContext = createContext("");
 export const ShopContextProvider = ({ children }) => {
   const url = process.env.REACT_APP_BACKEND_URL;
   const [stock, setStock] = useState([]);
+  const [singleDataSales, setSingleDataSales] = useState({});
   const [loading, setLoading] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("userLoggedIn"));
+  const [billRecords, setBillRecords] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("userLoggedIn")
+  );
   const [loginUser, setLoginUser] = useState(localStorage.getItem("username"));
   const [billDetails, setBillDetails] = useState({
     name: "",
@@ -62,7 +66,11 @@ export const ShopContextProvider = ({ children }) => {
         setIsLoggedIn,
         billDetails,
         setBillDetails,
+        singleDataSales,
+        setSingleDataSales,
         stock,
+        billRecords,
+        setBillRecords,
         successToast,
         errorToast,
         url,
